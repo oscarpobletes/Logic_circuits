@@ -1,0 +1,42 @@
+//: version "2.0-b10"
+//: property encoding = "iso8859-1"
+//: property locale = "en"
+//: property prefix = "_GG"
+//: property timingViolationMode = 2
+//: property initTime = "0 ns"
+
+`timescale 1ns/1ns
+
+//: /netlistBegin main
+module main;    //: root_module
+//: enddecls
+
+
+endmodule
+//: /netlistEnd
+
+//: /netlistBegin RS_trigger
+module RS_trigger(Q, R, notQ, S);
+//: interface  /sz:(133, 48) /bd:[ Li0>S(32/48) Li1>R(16/48) Ro0<Q(32/48) Ro1<notQ(16/48) ] /pd: 0 /pi: 0 /pe: 1 /pp: 1
+output Q;    //: /sn:0 {0}(471,118)(450,118)(450,119)(326,119){1}
+//: {2}(322,119)(264,119){3}
+//: {4}(324,121)(324,187)(230,187)(230,202)(240,202){5}
+output notQ;    //: /sn:0 {0}(465,200)(306,200){1}
+//: {2}(304,198)(304,136)(233,136)(233,121)(243,121){3}
+//: {4}(302,200)(261,200){5}
+input R;    //: /sn:0 {0}(240,197)(102,197)(102,207)(74,207){1}
+input S;    //: /sn:0 {0}(73,134)(188,134)(188,116)(243,116){1}
+//: enddecls
+
+  //: OUT g4 (Q) @(468,118) /sn:0 /w:[ 0 ]
+  _GGNAND2 #(4) g3 (.I0(R), .I1(Q), .Z(notQ));   //: @(251,200) /sn:0 /w:[ 0 5 5 ]
+  _GGNAND2 #(4) g2 (.I0(S), .I1(notQ), .Z(Q));   //: @(254,119) /sn:0 /w:[ 1 3 3 ]
+  //: IN g1 (R) @(72,207) /sn:0 /w:[ 1 ]
+  //: joint g6 (Q) @(324, 119) /w:[ 1 -1 2 4 ]
+  //: joint g7 (notQ) @(304, 200) /w:[ 1 2 4 -1 ]
+  //: OUT g5 (notQ) @(462,200) /sn:0 /w:[ 0 ]
+  //: IN g0 (S) @(71,134) /sn:0 /w:[ 0 ]
+
+endmodule
+//: /netlistEnd
+
